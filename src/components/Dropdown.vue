@@ -56,7 +56,6 @@
                         return a.id.localeCompare(b.id);
                     }
                 });
-                console.log(JSON.stringify(sortedItems));
                 window.localStorage.setItem("todoListObject", JSON.stringify(sortedItems));
                 this.showSort= !this.showSort;
                 this.$emit('veri-gonder', (JSON.parse(window.localStorage.getItem("todoListObject"))));

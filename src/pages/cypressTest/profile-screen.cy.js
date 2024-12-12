@@ -13,7 +13,7 @@ describe('<ProfileScreen />', () => {
     cy.get('#userEmailLabel')
     cy.get('#userEmail')
     cy.get('#profileScreenLogoutRouter')
-    cy.get('#profileScreenLogout')
+    cy.get('#profileScreenLogout').click()
 
   })
 })

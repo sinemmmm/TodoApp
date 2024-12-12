@@ -9,20 +9,28 @@ export default {
     },
     methods: {
       changePassword(){
-          console.log(this.userInfo.userPassword);
-          if(this.userInfo.userPassword == this.password){
+          if(this.confirmPassword == this.password){
+            const users= (JSON.parse(window.localStorage.getItem("users")));
+            const userId=((users.find(user => user.userId == this.userInfo.userId).userId));
+            users[userId]={userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}
+            window.localStorage.setItem("users",JSON.stringify(users));
+            window.localStorage.setItem(
+              "userInfo",JSON.stringify([{userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}]));
           this.$router.push('/home');
-            console.log("password changed");
           }
           else{
           this.wrongPassword=true;
-            console.log(" wrong password ");
           }
       }
     },
     mounted(){
         const userInfo= (JSON.parse(window.localStorage.getItem("userInfo")));
-        this.userInfo=userInfo[0];
-        console.log(userInfo[0]);
+        if(!userInfo){
+          alert('email bilgisi henüz alınmadı önce giriş yapın yada üye olun');
+        }
+        else{
+          this.userInfo=userInfo[0];
+        }
+      
   },
   };

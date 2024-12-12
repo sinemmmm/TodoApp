@@ -47,7 +47,7 @@
             {{ todo.title }}
           </h5>
           <p class="to-do-content">{{ todo.description }}</p>
-          <div class="to-do-createdTime">{{ todo.createdTime }}</div>
+          <div class="to-do-createdTime">{{'Created at ' + todo.createdTime }}</div>
         </div>
       </div>
     </div>

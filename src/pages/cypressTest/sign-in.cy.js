@@ -7,7 +7,7 @@ describe('<SignIn />', () => {
     cy.get('#signInEmail').type('sinem.alageyik@formsapp.com')
     cy.get('#signInPassword').type('123456')
     cy.get('#signInForgotPassword')
-    cy.get('#signInButton')
+    cy.get('#signInButton').click()
     cy.get('#signInAccountInfo')
     cy.get('#signUpButton')
   })

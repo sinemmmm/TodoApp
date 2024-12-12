@@ -1,0 +1,7 @@
+Daha önce hiç backend yazmadım, fakat backend tasarlasaydım şu şekilde olurdu:
+Okuma yazma işlemlerine göre database seçerdim ve tasarımını yapardım, 
+Gerekli güvenlik önlemlerini oluştururdum,
+kullanıcı davranışları için log file oluştururdum,
+bir documantasyon dosyası oluştururdum,
+çok fazla kullaıcı olduğunu düşünürsek kullanıcı requestlerini kısıtlardım  ve belli aralıkla kullanılması için bir cashing system oluştururdum
+(belirli bir sürede belirli miktardan falza request atıyorsa büyük ihtimalle bir sorun vardır ve engellemezsek fazlasıyla yük bindirebilir)
