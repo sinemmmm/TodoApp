@@ -1,4 +1,4 @@
-import Dropdown from '/Users/sinemalageyik/Desktop/vue/to-do-app/to-do-list/src/components/Dropdown.vue';  
+import Dropdown from '../../components/Dropdown.vue';  
 
 
 export default{
