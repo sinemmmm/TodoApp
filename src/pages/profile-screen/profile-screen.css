@@ -1,0 +1,44 @@
+.profileScreen{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+}
+.title{
+    color:#F79E89;
+    font-weight: 600;
+    font-size: 18px;
+
+}
+.header{
+    width:100%;
+    margin-top:25px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:114px;
+}
+.body{
+    margin-bottom: 110px;
+}
+.userInfo{
+    margin-bottom: 84px;
+}
+.label{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.logout{
+    background: #F79E89;
+    border:0;
+    color: white;
+}
+.info{
+    color: #272727;
+    opacity: 50%;
+
+}
+.userDetail{
+      color: #F79E89;
+}
