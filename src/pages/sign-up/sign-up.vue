@@ -10,7 +10,7 @@
     v-model="password"
     id='signUpPassword'
   />
- <input type="text" placeholder="Confirm Password" v-model="confirmPassword" class="signUpInput" id='signUpConfirmPassword'/>
+ <input type="password" placeholder="Confirm Password" v-model="confirmPassword" class="signUpInput" id='signUpConfirmPassword'  @keyup.enter="signUp"/>
   <button class="button" @click="signUp" id='signUpButton'>SIGN UP</button>
    <div class="accountText" > 
     <p id='signUpAccountInfoText'>Have an account? </p>

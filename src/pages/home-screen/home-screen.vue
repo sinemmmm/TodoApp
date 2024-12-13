@@ -58,11 +58,11 @@
         v-if="!addTodo"
       />
     </div>
-    <div v-if="addTodo | editTodo" class="addTodo">
+    <div v-if="addTodo | editTodo" class="addTodo" :style="addTodoStyle">
       <img
         src="../../assets/icons/rectangle.png"
         class="rectangleButton"
-        @click="closePanel"
+          @touchmove="handleTouchMove"
       />
       <div class="addTodoArea">
         <input

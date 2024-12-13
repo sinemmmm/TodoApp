@@ -19,7 +19,8 @@ export default{
                 editTodo:false,
                 todoList:[],
                 removeTodoItem: false,
-                imageUrl: JSON.parse(window.localStorage.getItem("imgUrl"))
+                imageUrl: JSON.parse(window.localStorage.getItem("imgUrl")),
+                mouseY:null,
             }
         },
         components: {
@@ -31,9 +32,28 @@ export default{
            
         },
       watch: {
+        mouseY(newValue, oldValue) {
+            
+            if(this.mouseY >700 ){
+                this.editTodo=false;
+                this.addTodo=false;
+                this.mouseY=null;
+            }
            
+          },
         },
+        computed: {
+            addTodoStyle() {
+                return {
+                  top: `${this.mouseY}px`,
+                  transition: 'all 0.1s ease', 
+                };}
+          },
         methods: {
+            handleTouchMove(event) {
+                this.mouseY = event.touches[0].clientY;
+
+              },
         getTime(){
             return this.currentDate.getDate() + ' ' + (this.currentDate.getMonth() + 1) + ' ' +this.currentDate.getFullYear();
         },
