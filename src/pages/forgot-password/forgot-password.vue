@@ -6,15 +6,17 @@
     class="forgotPasswordInput"
     placeholder="Password"
     v-model="password"
+    id="forgotPassword"
   />
   <p v-if="wrongPassword" class="message"> Invalid Password</p>
   <input
-    type="text"
+    type="password"
     placeholder="Confirm Password"
     v-model="confirmPassword"
     class="forgotPasswordInput"
+    id="forgotPasswordConfirmPassword"
   />
-  <button class="button" @click="changePassword">CHANGE PASSWORD</button>
+  <button class="button" @click="changePassword" id="forgotPasswordButton">CHANGE PASSWORD</button>
   </div>
 </template>
 

@@ -15,7 +15,7 @@ export default {
             users[userId]={userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}
             window.localStorage.setItem("users",JSON.stringify(users));
             window.localStorage.setItem(
-              "userInfo",JSON.stringify([{userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}]));
+              "userInfo",JSON.stringify({userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}));
           this.$router.push('/home');
           }
           else{
@@ -29,7 +29,7 @@ export default {
           alert('email bilgisi henüz alınmadı önce giriş yapın yada üye olun');
         }
         else{
-          this.userInfo=userInfo[0];
+          this.userInfo=userInfo;
         }
       
   },

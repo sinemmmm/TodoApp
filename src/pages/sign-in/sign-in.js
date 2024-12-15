@@ -16,7 +16,7 @@ export default {
          this.valid = this.users.find(user => user.userEmail === this.email && user.userPassword ===this.password);
          if(this.valid){
             window.localStorage.setItem(
-            "userInfo",JSON.stringify([{userId: this.valid.userId, userName: this.valid.userName, userEmail: this.valid.userEmail, userPassword:  this.valid.userPassword}]));
+            "userInfo",JSON.stringify({userId: this.valid.userId, userName: this.valid.userName, userEmail: this.valid.userEmail, userPassword:  this.valid.userPassword}));
             this.$router.push('/home');
          }
          else{

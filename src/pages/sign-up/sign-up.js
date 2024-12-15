@@ -20,7 +20,7 @@ export default {
             else{
             this.users.push({userId:2, userName:this.fullName, userEmail: this.email, userPassword: this.password});
             window.localStorage.setItem("users",JSON.stringify(this.users));
-            window.localStorage.setItem("userInfo",JSON.stringify([{userId:2, userName:this.fullName, userEmail: this.email, userPassword: this.password}]));
+            window.localStorage.setItem("userInfo",JSON.stringify({userId:2, userName:this.fullName, userEmail: this.email, userPassword: this.password}));
             this.$router.push('/home');
             }
           }

@@ -5,6 +5,6 @@ export default{
         }
     },
     mounted(){
-        this.userObj = JSON.parse(window.localStorage.getItem("userInfo"))[0];
+        this.userObj = JSON.parse(window.localStorage.getItem("userInfo"));
     }
 }
