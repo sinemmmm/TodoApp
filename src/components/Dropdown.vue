@@ -32,7 +32,8 @@
             return{
                 showSort:false,
                 selectedOption:"id",
-                todoList:[]
+                todoList:[],
+                user:null,
             }
         },
         emits: ["veri-gonder"],
@@ -41,7 +42,8 @@
                 this.showSort= !this.showSort;
             },
             sortItems(option){
-                this.todoList= (JSON.parse(window.localStorage.getItem("todoListObject")));
+            this.user=JSON.parse(window.localStorage.getItem("userInfo"))
+            this.todoList= this.user.userTodo
                 const sortedItems = this.todoList.sort((a, b) => {
                     if(option == 'date')
                         {return a.createdTime.localeCompare(b.createdTime);
@@ -56,15 +58,17 @@
                         return a.id.localeCompare(b.id);
                     }
                 });
-                window.localStorage.setItem("todoListObject", JSON.stringify(sortedItems));
-                this.showSort= !this.showSort;
-                this.$emit('veri-gonder', (JSON.parse(window.localStorage.getItem("todoListObject"))));
+            this.showSort= !this.showSort;
+               this.user={userId: this.user.userId, userName: this.user.userName, userEmail: this.user.userEmail, userPassword: this.user.userPassword, userTodo: sortedItems}
+               window.localStorage.setItem("userInfo",JSON.stringify(this.user)) 
+                this.$emit('veri-gonder', this.user.userTodo)
             },
           
             
         },
           mounted(){
-            this.todoList= (JSON.parse(window.localStorage.getItem("todoListObject")));
+            this.user=JSON.parse(window.localStorage.getItem("userInfo"))
+            this.todoList= this.user.userTodo
              
             
         },

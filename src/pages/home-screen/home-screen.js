@@ -12,6 +12,7 @@ export default{
                     createdTime: ""
                 },
                 currentDate: new Date(),
+                createdTime: "",
                 errorMesage: false,
                 detailOfTodo: false,
                 clickedTodo:0,
@@ -19,20 +20,25 @@ export default{
                 editTodo:false,
                 todoList:[],
                 removeTodoItem: false,
-                imageUrl: JSON.parse(window.localStorage.getItem("imgUrl")),
+                user:null,
+                users: null,
                 mouseY:null,
+                todoId:0
             }
         },
         components: {
             Dropdown
         },
         mounted(){
-            const value = (JSON.parse(window.localStorage.getItem("todoListObject")));
-            this.todoList = value;
-           
+            this.user= JSON.parse(window.localStorage.getItem("userInfo"))
+            this.users= JSON.parse(window.localStorage.getItem("users"))
+            this.todoList = this.user.userTodo
+            this.todoId= this.user.userTodo.length + 1 
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            this.createdTime= this.currentDate.toLocaleDateString('en-GB', options)
         },
       watch: {
-        mouseY(newValue, oldValue) {
+        mouseY() {
             
             if(this.mouseY >700 ){
                 this.editTodo=false;
@@ -63,8 +69,6 @@ export default{
             const reader = new FileReader();
             reader.onload = () => {
               this.userObj.image = reader.result;  
-              window.localStorage.setItem("imgUrl", JSON.stringify(reader.result));
-              this.imageUrl=reader.result;
             };
             reader.readAsDataURL(file); 
           }
@@ -78,10 +82,15 @@ export default{
             },
             addTodoItem(){
 
-            if(this.userObj.title !=="") 
+            if(this.userObj.title !=="" && this.userObj.description !=="" ) 
                 {
-                this.todoList.push({id:this.todoList.length, title:this.userObj.title, description:this.userObj.description, createdTime:this.userObj.createdTime});           
-                window.localStorage.setItem("todoListObject", JSON.stringify(this.todoList));
+                this.todoList.push({id:this.todoId, title:this.userObj.title, description:this.userObj.description, createdTime:this.userObj.createdTime, image:this.userObj.image})
+                this.todoId++
+                this.user.userTodo=this.todoList  
+                window.localStorage.setItem("userInfo", JSON.stringify(this.user));
+                this.users=this.users.filter(user => user.userId !== this.user.userId);
+                this.users.push(this.user)
+                window.localStorage.setItem("users", JSON.stringify(this.users));
                 this.closePanel();
                 this.errorMesage=false;
                 }
@@ -92,8 +101,8 @@ export default{
             openAddNewItem(){
                 this.userObj.title="";
                 this.userObj.description="";
-                 const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                this.userObj.createdTime= (this.currentDate.toLocaleDateString('en-GB', options));
+                this.userObj.image=null;
+                this.userObj.createdTime= this.createdTime
                 this.addTodo = !this.addTodo;
             },
             editTodoItem(){
@@ -101,11 +110,15 @@ export default{
                 if (todo.id === this.clickedTodo) {
                     todo.title = this.userObj.title; 
                     todo.description = this.userObj.description;
-                     const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                    todo.createdTime= (this.currentDate.toLocaleDateString('en-GB', options));
+                    todo.image=this.userObj.image;
+                    todo.createdTime= this.createdTime
                 }
                 });
-                window.localStorage.setItem("todoListObject", JSON.stringify(this.todoList));
+                this.user.todo=this.todoList  
+                window.localStorage.setItem("userInfo", JSON.stringify(this.user));
+                this.users=this.users.filter(user => user.userId !== this.user.userId);
+                this.users.push(this.user)
+                window.localStorage.setItem("users", JSON.stringify(this.users));
                 this.closePanel();
             },
             closePanel(){
@@ -118,20 +131,21 @@ export default{
                 let result=(this.todoList.filter(item => item.id ==id)[0]);
                 this.userObj.title=result.title;
                 this.userObj.description=result.description;
+                this.userObj.image=result.image;
                 this.userObj.createdTime=result.createdTime;
             },
             openEditTodo(){
                 this.editTodo= true;
                 this.detailOfTodo = false;
             },
-            openProfileScreen(){
-                this.editTodo= false;
-                this.detailOfTodo = false;
-            },
             deleteTodo(){
                 this.removeTodoItem= false;
-                this.todoList=this.todoList.filter(todo => todo.id !== this.clickedTodo);
-                window.localStorage.setItem("todoListObject", JSON.stringify(this.todoList));
+                this.user.userTodo=this.todoList.filter(todo => todo.id !== this.clickedTodo); 
+                window.localStorage.setItem("userInfo", JSON.stringify(this.user));
+                this.users=this.users.filter(user => user.userId !== this.user.userId);
+                this.users.push(this.user)
+                window.localStorage.setItem("users", JSON.stringify(this.users));     
+                this.todoList=this.user.userTodo         
                 this.backHome();
             }
         },

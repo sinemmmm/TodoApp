@@ -127,7 +127,7 @@
         {{ userObj.description }}
       </p>
 
-      <img :src="this.imageUrl" class="detailImage" id="detailImage" />
+      <img :src="userObj.image" class="detailImage" id="detailImage" />
       <div class="detailCreatedTime" id="detailCreatedTime">
         <p>{{ "Created at" + " " + userObj.createdTime }}</p>
       </div>

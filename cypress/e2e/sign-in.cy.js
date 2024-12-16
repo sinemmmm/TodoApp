@@ -22,7 +22,7 @@ describe('template spec', () => {
     cy.get('#signUpButton')
     cy.get('#signInButton').click()
     cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Bu email kayıtlı değil veya bilgileri yanlış girildi');
+      expect(alertText).to.equal('This email is not registered or the information was entered incorrectly');
     });
   })
 })
@@ -37,7 +37,7 @@ describe('template spec', () => {
     cy.get('#signUpButton')
     cy.get('#signInButton').click()
     cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Bu email kayıtlı değil veya bilgileri yanlış girildi');
+      expect(alertText).to.equal('This email is not registered or the information was entered incorrectly');
     });
   })
 })

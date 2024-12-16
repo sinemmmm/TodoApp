@@ -3,20 +3,20 @@ export default {
       return {
         password: "",
         confirmPassword: "",
-        userInfo:{},
+        user:{},
+        users:null,
         wrongPassword: false,
       };
     },
     methods: {
       changePassword(){
           if(this.confirmPassword == this.password){
-            const users= (JSON.parse(window.localStorage.getItem("users")));
-            const userId=((users.find(user => user.userId == this.userInfo.userId).userId));
-            users[userId]={userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}
-            window.localStorage.setItem("users",JSON.stringify(users));
-            window.localStorage.setItem(
-              "userInfo",JSON.stringify({userId: this.userInfo.userId, userName: this.userInfo.userName, userEmail: this.userInfo.userEmail, userPassword:  this.password}));
-          this.$router.push('/home');
+            this.users=this.users.filter(user => user.userId !== this.user.userId); 
+            this.user={userId: this.user.userId, userName: this.user.userName, userEmail: this.user.userEmail, userPassword: this.password, userTodo: this.user.userTodo}
+            this.users.push(this.user)
+            window.localStorage.setItem("users",JSON.stringify(this.users));
+            window.localStorage.setItem("userInfo",JSON.stringify(this.user));
+            this.$router.push('/home');
           }
           else{
           this.wrongPassword=true;
@@ -24,13 +24,10 @@ export default {
       }
     },
     mounted(){
-        const userInfo= (JSON.parse(window.localStorage.getItem("userInfo")));
-        if(!userInfo){
-          alert('email bilgisi henüz alınmadı önce giriş yapın yada üye olun');
+        this.user= (JSON.parse(window.localStorage.getItem("userInfo")));
+        this.users= (JSON.parse(window.localStorage.getItem("users")));
+        if(!this.user){
+          alert('Email information is not available yet, log in or sign up first.');
         }
-        else{
-          this.userInfo=userInfo;
-        }
-      
   },
   };

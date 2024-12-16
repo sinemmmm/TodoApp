@@ -10,7 +10,7 @@
     id='signInPassword'
     @keyup.enter="signIn"
   />
-  <router-link to="/forgot-password" class="forgetText" v-if="page" id='signInForgotPassword'>Forgot Password? </router-link>
+  <router-link to="/forgot-password" class="forgetText" id='signInForgotPassword'>Forgot Password? </router-link>
   <button class="button" @click="signIn" id='signInButton'>SIGN IN</button>
    <div class="accountText" id='signInAccountInfo'> <p>Don't have an account? </p>
     <p @click="this.$router.push('/sign-up');" class="signUp" id='signUpButton'> Sign Up</p></div>
